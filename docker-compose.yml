@@ -1,0 +1,8 @@
+api: 
+  build: ./api
+  ports: 
+    - 3000:3000
+  volumes: 
+    - ./api:/go/src/github.com/stevengeorgeharris/nowaste/api
+  environment: 
+    - EXAMPLE=anything
