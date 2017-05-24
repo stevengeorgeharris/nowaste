@@ -5,4 +5,22 @@ api:
   volumes: 
     - ./api:/go/src/github.com/stevengeorgeharris/nowaste/api
   environment: 
-    - EXAMPLE=anything
+    - ENV_PORT=:3000
+    - TEST_MESSAGE=Hello from Steven
+  links:
+    - db
+
+db: 
+  build: ./db
+  ports:
+  - "3010:3010"
+  environment:
+    MONGODB_USER: "steven"
+    MONGODB_DATABASE: "admin"
+    MONGODB_PASS: "admin"
+
+seed-db: 
+  build: ./db-seed
+  links:
+    - db
+

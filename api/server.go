@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/gorilla/mux"
 )
@@ -63,7 +64,7 @@ func CreateBusinessEndpoint(w http.ResponseWriter, req *http.Request) {
 
 // RenderHome root handler
 func RenderHome(w http.ResponseWriter, req *http.Request) {
-	fmt.Fprint(w, "Welcome")
+	fmt.Fprint(w, "Hello")
 }
 
 func main() {
@@ -76,5 +77,5 @@ func main() {
 	router.HandleFunc("/businesses", CreateBusinessEndpoint).Methods("POST")
 	router.HandleFunc("/business/{id}", GetBusinessEndpoint).Methods("GET")
 
-	log.Fatal(http.ListenAndServe(":3000", router))
+	log.Fatal(http.ListenAndServe(os.Getenv("ENV_PORT"), router))
 }
